@@ -1,8 +1,9 @@
 package com.bergturing.commons.result.service;
 
 
-import com.bergturing.commons.result.service.MethodResult;
-import com.bergturing.commons.result.service.factory.MethodResultType;
+import com.bergturing.commons.result.service.defaults.MethodMultiResult;
+import com.bergturing.commons.result.service.defaults.MethodSingleResult;
+import com.bergturing.commons.result.service.defaults.MethodVoidResult;
 
 /**
  * 方法结果封装的工厂接口
@@ -13,20 +14,13 @@ import com.bergturing.commons.result.service.factory.MethodResultType;
  */
 public interface MethodResultFactory {
     /**
-     * 创建结果封装对象
-     *
-     * @param type 方法结果的类型
-     * @param <T>  方法结果类型
-     * @return 创建的方法结果对象
-     */
-    <T> MethodResult<T> create(MethodResultType type);
-
-    /**
      * 没有返回值的结果封装对象
      *
      * @return 没有返回值的结果封装对象
      */
-    <T> MethodResult<T> voidResult();
+    static MethodVoidResult voidResult() {
+        return MethodVoidResult.of();
+    }
 
     /**
      * 单个返回值的结果封装对象
@@ -34,7 +28,9 @@ public interface MethodResultFactory {
      * @param <T> 结果返回类型
      * @return 单个返回值的结果封装对象
      */
-    <T> MethodResult<T> singleResult();
+    static <T> MethodSingleResult<T> singleResult() {
+        return MethodSingleResult.of();
+    }
 
     /**
      * 多个返回值的结果封装对象
@@ -42,5 +38,39 @@ public interface MethodResultFactory {
      * @param <T> 结果返回类型
      * @return 多个返回值的结果封装对象
      */
-    <T> MethodResult<T> multiResult();
+    static <T> MethodMultiResult<T> multiResult() {
+        return MethodMultiResult.of();
+    }
+
+    /**
+     * 没有返回值的结果封装对象
+     *
+     * @param success 结果标识
+     * @return 没有返回值的结果封装对象
+     */
+    static MethodVoidResult voidResult(boolean success) {
+        return MethodVoidResult.of(success);
+    }
+
+    /**
+     * 单个返回值的结果封装对象
+     *
+     * @param success 结果标识
+     * @param <T>     结果返回类型
+     * @return 单个返回值的结果封装对象
+     */
+    static <T> MethodSingleResult<T> singleResult(boolean success) {
+        return MethodSingleResult.of(success);
+    }
+
+    /**
+     * 多个返回值的结果封装对象
+     *
+     * @param success 结果标识
+     * @param <T>     结果返回类型
+     * @return 多个返回值的结果封装对象
+     */
+    static <T> MethodMultiResult<T> multiResult(boolean success) {
+        return MethodMultiResult.of(success);
+    }
 }

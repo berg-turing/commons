@@ -8,42 +8,58 @@ import java.util.List;
  * @author bo.he02@hand-china.com
  * @apiNote 2018/09/29
  */
-public class MethodVoidResult<T> extends AbstractMethodResult<T> {
+public class MethodVoidResult extends AbstractMethodResult<Void> {
 
-    public MethodVoidResult() {
-        this(true);
+    /**
+     * 构造方法
+     *
+     * @param success 处理结果标识
+     */
+    private MethodVoidResult(boolean success) {
+        super(success);
     }
 
-    public MethodVoidResult(boolean flag) {
-        this(flag, "");
+    /**
+     * 无参工厂方法
+     *
+     * @return 单个返回值类型对象
+     */
+    public static MethodVoidResult of() {
+        return MethodVoidResult.of(true);
     }
 
-    public MethodVoidResult(boolean flag, String message) {
-        super(flag, new StringBuilder(message));
+    /**
+     * 有一个成功标识的工厂方法
+     *
+     * @param success 成功标识
+     * @return 单个返回值类型对象
+     */
+    public static MethodVoidResult of(boolean success) {
+        return new MethodVoidResult(success);
     }
 
     @Override
-    protected void setSingleResult(T result) {
+    protected void setSingleResult(Void result) {
         throw new RuntimeException("can't use");
     }
 
     @Override
-    protected void setMultiResult(List<T> resultList) {
+    protected void setMultiResult(List<Void> resultList) {
         throw new RuntimeException("can't use");
     }
 
     @Override
-    protected void addResult(T result) {
+    protected void addResult(Void result) {
         throw new RuntimeException("can't use");
     }
 
     @Override
-    public T getSingleResult() {
+    public Void getSingleResult() {
         throw new RuntimeException("can't use");
     }
 
     @Override
-    public List<T> getMultiResult() {
+    public List<Void> getMultiResult() {
         throw new RuntimeException("can't use");
     }
 }

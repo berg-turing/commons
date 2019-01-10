@@ -19,16 +19,34 @@ public class MethodSingleResult<T> extends AbstractMethodResult<T> {
      */
     private T result;
 
-    public MethodSingleResult() {
-        this(true);
+    /**
+     * 构造方法
+     *
+     * @param success 处理结果标识
+     */
+    private MethodSingleResult(boolean success) {
+        super(success);
     }
 
-    public MethodSingleResult(boolean flag) {
-        this(flag, "");
+    /**
+     * 无参工厂方法
+     *
+     * @param <T> 结果类型的泛型
+     * @return 单个返回值类型对象
+     */
+    public static <T> MethodSingleResult<T> of() {
+        return MethodSingleResult.of(true);
     }
 
-    public MethodSingleResult(boolean flag, String message) {
-        super(flag, new StringBuilder(message));
+    /**
+     * 有一个成功标识的工厂方法
+     *
+     * @param success 成功标识
+     * @param <T>     结果类型的泛型
+     * @return 单个返回值类型对象
+     */
+    public static <T> MethodSingleResult<T> of(boolean success) {
+        return new MethodSingleResult<>(success);
     }
 
     @Override

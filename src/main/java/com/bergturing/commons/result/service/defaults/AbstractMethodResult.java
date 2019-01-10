@@ -26,9 +26,9 @@ public abstract class AbstractMethodResult<T> implements MethodResult<T> {
      */
     private StringBuilder message;
 
-    AbstractMethodResult(boolean success, StringBuilder message) {
+    AbstractMethodResult(boolean success) {
         this.success = success;
-        this.message = message;
+        this.message = new StringBuilder();
     }
 
     @Override
